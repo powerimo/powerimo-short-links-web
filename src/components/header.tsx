@@ -17,7 +17,7 @@ export function Header() {
         <header className='sticky top-0 flex h-16 gap-4 border-b bg-background'>
             <div className='flex container items-center px-4 md:px-6'>
                 <h1 className='flex-1 shrink-0 whitespace-nowrap text-xl font-semibold'>
-                    Powerimo Short Link
+                    Powerimo Short Links
                 </h1>
                 <div className='flex items-center gap-4 md:ml-auto md:gap-2 lg:gap-4'>
                     <Button variant='ghost' size='icon' onClick={switchTheme}>
