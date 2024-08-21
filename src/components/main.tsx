@@ -27,6 +27,8 @@ export function Main() {
         },
     });
 
+    const { reset, getValues, handleSubmit, control } = form;
+
     const { toast } = useToast();
 
     const createLink: SubmitHandler<Form> = async (data) => {
@@ -40,7 +42,7 @@ export function Main() {
         });
         if (response.ok) {
             const linkCreated = await response.text();
-            form.reset({ shortLink: linkCreated });
+            reset({ shortLink: linkCreated });
 
             navigator.clipboard.writeText(linkCreated);
             toast({
@@ -57,7 +59,7 @@ export function Main() {
     }
 
     const toClipboard = () => {
-        const shortLink = form.getValues('shortLink');
+        const shortLink = getValues('shortLink');
 
         if (shortLink) {
             navigator.clipboard.writeText(shortLink);
@@ -76,9 +78,9 @@ export function Main() {
                 </CardHeader>
                 <CardContent className='flex w-full flex-col space-y-6 divide-y'>
                     <Form {...form}>
-                        <form onSubmit={form.handleSubmit(createLink)}>
+                        <form onSubmit={handleSubmit(createLink)}>
                             <FormField
-                                control={form.control}
+                                control={control}
                                 name='url'
                                 render={({ field }) => {
                                     return (
@@ -101,7 +103,7 @@ export function Main() {
                                 }}
                             />
                             <FormField
-                                control={form.control}
+                                control={control}
                                 name='shortLink'
                                 render={({ field }) => {
                                     return !!field.value ? (
