@@ -32,14 +32,7 @@ pipeline {
 
         stage('Update npm') {
             steps {
-                sh 'npm install --location=global npm'
-                sh 'npm install --location=global pnpm'
-            }
-        }
-
-        stage('Update packages') {
-            steps {
-                sh 'pnpm install'
+                sh 'npm install'
             }
         }
 
@@ -50,7 +43,7 @@ pipeline {
                 branch pattern: "release/.*", comparator: "REGEXP"
             }
             steps {
-                sh 'pnpm build'
+                sh 'npm run build'
             }
         }
 
