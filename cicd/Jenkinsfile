@@ -5,6 +5,9 @@ pipeline {
         GIT_BRANCH = "${env.BRANCH_NAME}".tokenize('/').last()
         GIT_COMMIT_SHORT = "${env.GIT_COMMIT.take(7)}"
 
+        // Docker repository
+        DOCKER_REPO = "${env.DOCKER_REPO_PREFIX}"
+
         // Notifications
         NSS_API_KEY = credentials('powerimo-nss-api-key')
 
