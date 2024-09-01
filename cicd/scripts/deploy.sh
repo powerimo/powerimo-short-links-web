@@ -8,7 +8,7 @@ if [ "$ENVIRONMENT" == "QA" ]; then
 elif [ "$ENVIRONMENT" == "PROD" ]; then
     echo "Deploying to PROD environment"
     # PROD deployment steps
-    DC_NAME="powerimo-short-links-prod"
+    DC_NAME="powerimo-short-links-web-prod"
 
     # shellcheck disable=SC1090
     source ~/config/powerimo-short-links-vars-prod
