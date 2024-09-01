@@ -1,6 +1,6 @@
 pipeline {
     environment {
-        imagename = imagename = "${env.DOCKER_REPO}/powerimo/short-links-web"
+        imagename = "${env.DOCKER_REPO}/powerimo/short-links-web"
         FULL_PATH_BRANCH = "${env.BRANCH_NAME}"
         GIT_BRANCH = "${env.BRANCH_NAME}".tokenize('/').last()
         GIT_COMMIT_SHORT = "${env.GIT_COMMIT.take(7)}"
