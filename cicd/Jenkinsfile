@@ -40,10 +40,12 @@ pipeline {
             }
         }
 
-        stage('Build QA') {
+        stage('Build') {
             when {
-                branch 'qa'
-                branch pattern: "release/.*", comparator: "REGEXP"
+                anyOf {
+                    branch 'qa'
+                    branch pattern: "release/.*", comparator: "REGEXP"
+                }
             }
             steps {
                 sh 'pnpm build'
