@@ -20,7 +20,7 @@ elif [ "$ENVIRONMENT" == "PROD" ]; then
 
     docker run -d \
         --name=${DC_NAME} \
-        -p 16011:80 \
+        -p 16010:80 \
         "${DI_NAME}"
 else
     echo "Unknown environment: $ENVIRONMENT"
