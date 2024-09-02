@@ -18,7 +18,7 @@ elif [ "$ENVIRONMENT" == "PROD" ]; then
     # shellcheck disable=SC2153
     docker pull "${DI_NAME}"
 
-    docker run -d \
+    docker run -d --restart until-restart \
         --name=${DC_NAME} \
         -p 16010:80 \
         "${DI_NAME}"
