@@ -1,7 +1,6 @@
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
-import { Input } from '@/components/ui/input';
 import { Separator } from '@/components/ui/separator';
 import { useToast } from '@/components/ui/use-toast';
 import { CONFIG } from '@/lib/config';
@@ -9,10 +8,14 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { Clipboard, Link } from 'lucide-react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { z } from 'zod';
+import {Textarea} from "@/components/ui/textarea.tsx";
+import {Input} from "@/components/ui/input.tsx";
 
 const FormSchema = z.object({
-    url: z.string().url({ message: 'Please enter a valid URL string' }),
-    shortLink: z.string(),
+    secretText: z.string(),
+    secretUrl: z.string(),
+    hitLimit: z.number().optional(),
+    ttl: z.number().optional()
 });
 
 type Form = z.infer<typeof FormSchema>;
@@ -22,8 +25,9 @@ export function Main() {
         mode: 'onChange',
         resolver: zodResolver(FormSchema),
         defaultValues: {
-            url: '',
-            shortLink: '',
+            secretText: '',
+            secretUrl: '',
+            hitLimit: 1,
         },
     });
 
@@ -32,21 +36,27 @@ export function Main() {
     const { toast } = useToast();
 
     const createLink: SubmitHandler<Form> = async (data) => {
+        const requestBody = JSON.stringify({
+            secret: data.secretText,
+            hitLimit: data.hitLimit,
+            ttl: data.ttl ?? data.ttl
+        });
 
-        const response = await fetch(CONFIG.apiUrl, {
+        const response = await fetch(CONFIG.apiSecretsUrl, {
             method: 'POST',
             headers: {
-                'Content-Type': 'text/plain',
+                'Content-Type': 'application/json',
             },
-            body: data.url,
+            body: requestBody,
         });
         if (response.ok) {
-            const linkCreated = await response.text();
-            reset({ shortLink: linkCreated });
+            const responseData = await response.json();
+            const linkCreated = responseData.url;
+            reset({ secretUrl: linkCreated });
 
-            navigator.clipboard.writeText(linkCreated);
+            await navigator.clipboard.writeText(linkCreated);
             toast({
-                title: 'Your short link created and copied to clipboard',
+                title: 'Link to the secret created and copied to the clipboard',
                 description: linkCreated,
             });
         } else {
@@ -59,40 +69,42 @@ export function Main() {
     }
 
     const toClipboard = () => {
-        const shortLink = getValues('shortLink');
+        const secretLink = getValues('secretUrl');
 
-        if (shortLink) {
-            navigator.clipboard.writeText(shortLink);
-            toast({
-                title: 'Your short link copied to clipboard',
-                description: shortLink,
-            });
+        if (secretLink) {
+            navigator.clipboard.writeText(secretLink).then(() => {
+                    toast({
+                        title: 'Copied',
+                        description: secretLink,
+                    });
+                }
+            );
+
         }
     }
 
     return (
         <div className='flex-1 container content-center px-4 md:px-6'>
-            <Card className='w-full max-w-lg m-auto border-0'>
+            <Card className='w-full m-auto border-0'>
                 <CardHeader>
-                    <CardTitle>Create short link</CardTitle>
+                    <CardTitle>Create secret</CardTitle>
                 </CardHeader>
                 <CardContent className='flex w-full flex-col space-y-6 divide-y'>
                     <Form {...form}>
                         <form onSubmit={handleSubmit(createLink)}>
                             <FormField
                                 control={control}
-                                name='url'
+                                name='secretText'
                                 render={({ field }) => {
                                     return (
                                         <FormItem className='w-full'>
-                                            <FormLabel>Enter the URL to shorten and click on link button</FormLabel>
+                                            <FormLabel>Input your secret text here</FormLabel>
                                             <FormControl>
                                                 <div className='flex items-end space-x-2'>
-                                                    <Input placeholder='your url' {...field} />
+                                                    <Textarea placeholder='Secret text' {...field} />
                                                     <Button
                                                         variant='ghost'
                                                         size='icon'
-                                                        //isDisabled={!isValidUrl || !url}
                                                         type='submit'
                                                     ><Link/></Button>
                                                 </div>
@@ -102,9 +114,51 @@ export function Main() {
                                     );
                                 }}
                             />
+                            {/* Hit Limit Field */}
+                            <FormField
+                                name="hitLimit"
+                                control={control}
+                                render={({ field }) => (
+                                    <FormItem>
+                                        <FormLabel>Hits limit</FormLabel>
+                                        <FormControl>
+                                            <Input
+                                                type="number"
+                                                placeholder="Enter limit"
+                                                {...field}
+                                                value={field.value?.toString() || ''}
+                                                onChange={(e) =>
+                                                    field.onChange(Number(e.target.value || 0))
+                                                }
+                                            />
+                                        </FormControl>
+                                    </FormItem>
+                                )}
+                            />
+                            {/* TTL Field */}
+                            <FormField
+                                name="ttl"
+                                control={control}
+                                render={({ field }) => (
+                                    <FormItem>
+                                        <FormLabel>Time to live (seconds, optional)</FormLabel>
+                                        <FormControl>
+                                            <Input
+                                                type="number"
+                                                placeholder="Enter TTL"
+                                                {...field}
+                                                value={field.value?.toString() || ''}
+                                                onChange={(e) =>
+                                                    field.onChange(Number(e.target.value || 0))
+                                                }
+                                            />
+                                        </FormControl>
+                                    </FormItem>
+                                )}
+                            />
                             <FormField
                                 control={control}
-                                name='shortLink'
+                                name='secretUrl'
                                 render={({ field }) => {
                                     return !!field.value ? (
                                         <>
