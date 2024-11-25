@@ -72,7 +72,7 @@ jobs:
           username: ${{ secrets.DEPLOY_USER }}
           key: ${{ secrets.DEPLOY_USER_KEY }}
           source: cicd/bash/deploy.sh
-          target: ~/bin/deploy-powerimo-secrets-web.sh
+          target: ~/bin/deploy-powerimo-secrets-frontend.sh
 
       - name: Deploy to QA
         uses: appleboy/ssh-action@v0.1.7
@@ -82,5 +82,5 @@ jobs:
           key: ${{ secrets.DEPLOY_USER_KEY }}
           port: ${{ secrets.SSH_PORT }}
           script: |
-            chmod +x ~/bin/deploy-powerimo-secrets-web.sh
+            chmod +x ~/bin/deploy-powerimo-secrets-frontend.sh
             ~/bin/deploy-powerimo-secrets-frontend.sh "powerimo-secrets-frontend-qa" "powerimo/powerimo-secrets-web:qa" "qa"
