@@ -82,5 +82,5 @@ jobs:
           key: ${{ secrets.DEPLOY_USER_KEY }}
           port: ${{ secrets.SSH_PORT }}
           script: |
-            chmod +x ~/bin/deploy-powerimo-secret-web.sh
+            chmod +x ~/bin/deploy-powerimo-secrets-web.sh
             ~/bin/deploy-powerimo-secrets-frontend.sh "powerimo-secrets-frontend-qa" "powerimo/powerimo-secrets-web:qa" "qa"
