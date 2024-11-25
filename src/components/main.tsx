@@ -1,29 +1,32 @@
-import {Button} from '@/components/ui/button';
-import {Card, CardContent, CardHeader, CardTitle} from '@/components/ui/card';
-import {Form, FormControl, FormField, FormItem, FormLabel, FormMessage} from '@/components/ui/form';
-import {Separator} from '@/components/ui/separator';
-import {useToast} from '@/components/ui/use-toast';
-import {CONFIG} from '@/lib/config';
-import {zodResolver} from '@hookform/resolvers/zod';
-import {Clipboard} from 'lucide-react';
-import {SubmitHandler, useForm} from 'react-hook-form';
-import {z} from 'zod';
-import {Textarea} from "@/components/ui/textarea.tsx";
-import {Input} from "@/components/ui/input.tsx";
-import {useEffect, useState} from "react";
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
+import { Separator } from '@/components/ui/separator';
+import { useToast } from '@/components/ui/use-toast';
+import { CONFIG } from '@/lib/config';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { Clipboard } from 'lucide-react';
+import { SubmitHandler, useForm } from 'react-hook-form';
+import { z } from 'zod';
+import { Textarea } from "@/components/ui/textarea.tsx";
+import { Input } from "@/components/ui/input.tsx";
+import { useEffect, useState } from "react";
+
+const DEFAULT_TTL = 60 * 60 * 24 * 7; // 1 week
+const DEFAULT_HIT_LIMIT = 1;
 
 const FormSchema = z.object({
     secretText: z.string(),
     secretUrl: z.string(),
-    hitLimit: z.number().optional(),
-    ttl: z.number().optional()
+    hitLimit: z.number().optional().default(DEFAULT_HIT_LIMIT),
+    ttl: z.number().optional().default(DEFAULT_TTL),
 });
 
 type Form = z.infer<typeof FormSchema>;
 
-const addSecondsToDate = (date: Date, seconds: number) => {
+const addSecondsToDate = (date: Date, seconds: number): Date => {
     return new Date(date.getTime() + seconds * 1000);
-}
+};
 
 export function Main() {
     const form = useForm<Form>({
@@ -32,43 +35,40 @@ export function Main() {
         defaultValues: {
             secretText: '',
             secretUrl: '',
-            hitLimit: 1,
+            hitLimit: DEFAULT_HIT_LIMIT,
+            ttl: DEFAULT_TTL,
         },
     });
 
-    const { reset, getValues, handleSubmit, control, watch } = form;
-    // Watch TTL and dynamically calculate expiration date
-    const ttl = watch("ttl") || 0;
-    const [expireAt, setExpireAt] = useState<Date | null>(null);
+    const { reset, getValues, handleSubmit, control, watch, setValue } = form;
+    const ttl = watch("ttl") || DEFAULT_TTL;
+    const [expireAt, setExpireAt] = useState<Date | null>(addSecondsToDate(new Date(), ttl));
+    const { toast } = useToast();
 
     useEffect(() => {
-        // Update expiration date based on TTL and current time
         if (ttl > 0) {
+            setExpireAt(addSecondsToDate(new Date(), ttl));
+
             const interval = setInterval(() => {
                 setExpireAt(addSecondsToDate(new Date(), ttl));
             }, 1000);
 
-            return () => clearInterval(interval); // Cleanup interval on unmount
+            return () => clearInterval(interval); // clear interval
         } else {
-            setExpireAt(null); // Reset if TTL is not set
+            setExpireAt(null);
         }
     }, [ttl]);
-    //const expireAtString = expireAt ? expireAt.toString(): "";
-
-    const { toast } = useToast();
 
     const createLink: SubmitHandler<Form> = async (data) => {
         try {
-            const requestBody = JSON.stringify({
-                secret: data.secretText,
-                hitLimit: data.hitLimit,
-                ttl: data.ttl,
-            });
-
             const response = await fetch(CONFIG.apiSecretsUrl, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: requestBody,
+                body: JSON.stringify({
+                    secret: data.secretText,
+                    hitLimit: data.hitLimit,
+                    ttl: data.ttl,
+                }),
             });
 
             if (!response.ok) {
@@ -77,13 +77,16 @@ export function Main() {
 
             const responseData = await response.json();
             const linkCreated = responseData.url;
-            reset({ ...data, secretUrl: linkCreated });
+
+            reset({
+                secretText: '',
+                secretUrl: linkCreated,
+                hitLimit: DEFAULT_HIT_LIMIT,
+                ttl: DEFAULT_TTL,
+            });
 
             await navigator.clipboard.writeText(linkCreated);
-            toast({
-                title: 'Link created and copied to clipboard',
-                description: linkCreated,
-            });
+            toast({ title: 'Link created and copied to clipboard', description: linkCreated });
         } catch (error: any) {
             toast({
                 title: 'Error creating link',
@@ -102,13 +105,21 @@ export function Main() {
         }
     };
 
+    const updateTtl = (value: number) => {
+        setValue('ttl', value);
+    };
+
+    const incrementTtl = (value: number) => {
+        setValue('ttl', ttl + value);
+    };
+
     return (
-        <div className='flex-1 container content-center px-4 md:px-6'>
-            <Card className='w-full m-auto border-0'>
+        <div className="flex-1 container content-center px-4 md:px-6">
+            <Card className="w-full m-auto border-0">
                 <CardHeader>
-                    <CardTitle>Create secret</CardTitle>
+                    <CardTitle>Create Secret</CardTitle>
                 </CardHeader>
-                <CardContent className='flex w-full flex-col space-y-6 divide-y'>
+                <CardContent className="flex w-full flex-col space-y-6 divide-y">
                     <Form {...form}>
                         <form onSubmit={handleSubmit(createLink)}>
                             {/* Secret Text Field */}
@@ -167,9 +178,27 @@ export function Main() {
                                                 }
                                             />
                                         </FormControl>
-                                        <FormMessage>
-                                            {expireAt && `Expires at: ${expireAt.toLocaleString()}`}
-                                        </FormMessage>
+                                        {expireAt && <p>Expires at: {expireAt.toLocaleString()}</p>}
+                                        <div className="flex flex-wrap gap-2 mt-2">
+                                            <Button onClick={() => updateTtl(3600)} type="button">
+                                                1 hour
+                                            </Button>
+                                            <Button onClick={() => updateTtl(3600 * 24)} type="button">
+                                                1 day
+                                            </Button>
+                                            <Button onClick={() => updateTtl(3600 * 24 * 7)} type="button">
+                                                1 week
+                                            </Button>
+                                            <Button onClick={() => incrementTtl(3600)} type="button">
+                                                +1 hour
+                                            </Button>
+                                            <Button onClick={() => incrementTtl(3600 * 24)} type="button">
+                                                +1 day
+                                            </Button>
+                                            <Button onClick={() => incrementTtl(3600 * 24 * 7)} type="button">
+                                                +1 week
+                                            </Button>
+                                        </div>
                                     </FormItem>
                                 )}
                             />
@@ -198,7 +227,9 @@ export function Main() {
                                     ) : (<></>)
                                 }
                             />
-
+                            <Button type="submit" className="w-full">
+                                Create Secret
+                            </Button>
                         </form>
                     </Form>
                 </CardContent>
