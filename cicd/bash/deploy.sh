@@ -21,7 +21,7 @@ docker pull "${IMAGE_NAME}"
 echo "Starting the container..."
 docker run -d --restart unless-stopped \
     --name="${CONTAINER_NAME}" \
-    -p 15511:8080 \
+    -p 15511:80 \
     "${IMAGE_NAME}"
 
 echo "Container has been started"
