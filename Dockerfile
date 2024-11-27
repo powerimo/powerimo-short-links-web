@@ -4,7 +4,7 @@ ENV API_URL=http://localhost:3000
 
 COPY dist /usr/share/nginx/html
 
-RUN rm /etc/nginx/conf.d/default.conf.template
+RUN rm /etc/nginx/conf.d/default.conf
 
 COPY cicd/nginx/default.conf.template /etc/nginx/conf.d
 
