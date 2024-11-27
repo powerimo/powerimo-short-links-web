@@ -4,6 +4,9 @@ on:
   push:
     branches: [ "main" ]
 
+env:
+  PROJECT_NAME: powerimo-secrets-web
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -47,7 +50,7 @@ jobs:
         context: .
         push: true
         tags: |
-          powerimo/powerimo-secrets-web:qa
+          powerimo/${PROJECT_NAME}:qa
 
     - name: Logout from Docker Hub
       run: docker logout
@@ -72,7 +75,7 @@ jobs:
           username: ${{ secrets.DEPLOY_USER }}
           key: ${{ secrets.DEPLOY_USER_KEY }}
           source: cicd/bash/deploy.sh
-          target: ~/bin/deploy-powerimo-secrets-frontend.sh
+          target: ~/bin/deploy-${PROJECT_NAME}-qa.sh
 
       - name: Deploy to QA
         uses: appleboy/ssh-action@v0.1.7
@@ -82,5 +85,5 @@ jobs:
           key: ${{ secrets.DEPLOY_USER_KEY }}
           port: ${{ secrets.SSH_PORT }}
           script: |
-            chmod +x ~/bin/deploy-powerimo-secrets-frontend.sh
-            ~/bin/deploy-powerimo-secrets-frontend.sh "powerimo-secrets-frontend-qa" "powerimo/powerimo-secrets-web:qa" "qa"
+            chmod +x ~/bin/deploy-${PROJECT_NAME}-qa.sh
+            ~/bin/deploy-${PROJECT_NAME}-qa.sh "${PROJECT_NAME}-qa" "powerimo/${PROJECT_NAME}:qa" "qa" "${{ vars.WEB_URL }}"
