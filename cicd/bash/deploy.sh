@@ -22,6 +22,7 @@ echo "Starting the container..."
 docker run -d --restart unless-stopped \
     --name="${CONTAINER_NAME}" \
     -p 15511:80 \
+    -e API_URL="${API_URL}" \
     "${IMAGE_NAME}"
 
 echo "Container has been started"
