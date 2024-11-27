@@ -8,6 +8,6 @@ RUN rm /etc/nginx/conf.d/default.conf
 
 COPY cicd/nginx/default.conf.template /etc/nginx/conf.d
 
-CMD envsubst '$API_URL' < /etc/nginx/templates/nginx.conf.template > /etc/nginx/nginx.conf && nginx -g 'daemon off;'
+CMD envsubst '$API_URL' < /etc/nginx/templates/default.conf.template > /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;'
 
 EXPOSE 80
