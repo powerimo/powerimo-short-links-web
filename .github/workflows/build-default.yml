@@ -50,7 +50,7 @@ jobs:
         context: .
         push: true
         tags: |
-          powerimo/${{ env.PROJECT_NAME }}:qa
+          powerimo/${PROJECT_NAME}:qa
 
     - name: Logout from Docker Hub
       run: docker logout
@@ -75,7 +75,7 @@ jobs:
           username: ${{ secrets.DEPLOY_USER }}
           key: ${{ secrets.DEPLOY_USER_KEY }}
           source: cicd/bash/deploy.sh
-          target: ~/bin/deploy-${{ env.PROJECT_NAME }}-qa.sh
+          target: ~/bin/deploy-${PROJECT_NAME}-qa.sh
 
       - name: Deploy to QA
         uses: appleboy/ssh-action@v0.1.7
@@ -86,4 +86,4 @@ jobs:
           port: ${{ secrets.SSH_PORT }}
           script: |
             chmod +x ~/bin/deploy-${PROJECT_NAME}-qa.sh
-            ~/bin/deploy-${PROJECT_NAME}-qa.sh "${{ env.PROJECT_NAME }}-qa" "powerimo/${{ env.PROJECT_NAME }}:qa" "qa" "${{ vars.WEB_URL }}"
+            ~/bin/deploy-${PROJECT_NAME}-qa.sh "${PROJECT_NAME}-qa" "powerimo/${PROJECT_NAME}:qa" "qa" "${{ vars.WEB_URL }}"
