@@ -86,4 +86,4 @@ jobs:
           port: ${{ secrets.SSH_PORT }}
           script: |
             chmod +x ~/bin/deploy-${{ env.PROJECT_NAME }}-qa.sh
-            ~/bin/deploy-${PROJECT_NAME}-qa.sh "${{ env.PROJECT_NAME }}-qa" "powerimo/${{ env.PROJECT_NAME }}:qa" "qa" "${{ vars.WEB_URL }}"
+            ~/bin/deploy-${{ env.PROJECT_NAME }}-qa.sh "${{ env.PROJECT_NAME }}-qa" "powerimo/${{ env.PROJECT_NAME }}:qa" "qa" "${{ vars.WEB_URL }}"
