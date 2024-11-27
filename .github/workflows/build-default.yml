@@ -85,5 +85,6 @@ jobs:
           key: ${{ secrets.DEPLOY_USER_KEY }}
           port: ${{ secrets.SSH_PORT }}
           script: |
+            echo "Starting container wit API URL: ${{ vars.API_URL }}"
             chmod +x ~/bin/deploy-${{ env.PROJECT_NAME }}-qa.sh
-            ~/bin/deploy-${{ env.PROJECT_NAME }}-qa.sh "${{ env.PROJECT_NAME }}-qa" "powerimo/${{ env.PROJECT_NAME }}:qa" "qa" "${{ vars.WEB_URL }}"
+            ~/bin/deploy-${{ env.PROJECT_NAME }}-qa.sh "${{ env.PROJECT_NAME }}-qa" "powerimo/${{ env.PROJECT_NAME }}:qa" "qa" "${{ vars.API_URL }}"
