@@ -6,7 +6,7 @@ on:
       - 'release/**'
 
 env:
-  SERVER_PROJECT_NAME: powerimo-secrets-server
+  SERVER_PROJECT_NAME: powerimo-secrets-web
 
 jobs:
   build:
@@ -14,6 +14,14 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+
+      - name: Determine Release Version
+        id: set-version
+        if: startsWith(github.ref, 'refs/heads/release/')
+        run: |
+          RELEASE_VERSION=$(echo "${GITHUB_REF#refs/heads/release/}")
+          echo "RELEASE_VERSION=${RELEASE_VERSION}" >> $GITHUB_ENV
+          echo "Release version detected: ${RELEASE_VERSION}"   
 
       - name: Install pnpm
         uses: pnpm/action-setup@v4
