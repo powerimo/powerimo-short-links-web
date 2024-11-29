@@ -31,7 +31,7 @@ export default ({ mode }: { mode: any }) => {
                     [process.env.VITE_API_URL as string]: {
                         target: VITE_PROXY_TARGET,
                         changeOrigin: true,
-                        rewrite: (path) => path.replace(VITE_API_URL as string, VITE_PROXY_TARGET as string),
+                        rewrite: (path) => path.replace(VITE_API_URL as string, `${VITE_PROXY_TARGET}${VITE_API_URL}` as string),
                     },
                 },
             },

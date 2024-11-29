@@ -5,6 +5,7 @@ import { ThemeProvider } from '@/components/theme-provider';
 import { Toaster } from '@/components/ui/toaster';
 import { CONFIG } from '@/lib/config';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { Secret } from './components/secret';
 
 const router = createBrowserRouter([
     {
@@ -12,6 +13,10 @@ const router = createBrowserRouter([
         element: <Layout><Main/></Layout>,
         errorElement: <Layout><NotFound/></Layout>,
     },
+    {
+        path: '/:code',
+        element: <Layout><Secret/></Layout>,
+    }
 ], {
     basename: CONFIG.baseDir,
 });
