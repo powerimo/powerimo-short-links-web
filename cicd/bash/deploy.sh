@@ -1,28 +1,29 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-ENVIRONMENT=$1
+CONTAINER_NAME=$1
+IMAGE_NAME=$2
+APP_ENV=$3
+API_URL=$4
 
-if [ "$ENVIRONMENT" == "QA" ]; then
-    echo "Deploying to QA environment"
-    # QA deployment steps
-elif [ "$ENVIRONMENT" == "PROD" ]; then
-    echo "Deploying to PROD environment"
-    # PROD deployment steps
-    DC_NAME="powerimo-short-links-web-prod"
+# log
+echo "Starting container ${CONTAINER_NAME} based on the image ${IMAGE_NAME}"
+echo "env: ${APP_ENV}"
 
-    # shellcheck disable=SC1090
-    source ~/config/powerimo-short-links-vars-prod
+# read local vars
+echo "Sourcing vars..."
+# shellcheck disable=SC1090
+source ~/config/"${CONTAINER_NAME}"/vars
 
-    docker stop ${DC_NAME} > /dev/null
-    docker container rm ${DC_NAME} > /dev/null
-    # shellcheck disable=SC2153
-    docker pull "${DI_NAME}"
+echo "Stop previous launched container"
+docker stop "${CONTAINER_NAME}" > /dev/null
+docker rm "${CONTAINER_NAME}" > /dev/null
+docker pull "${IMAGE_NAME}"
 
-    docker run -d --restart unless-stopped \
-        --name=${DC_NAME} \
-        -p 16010:80 \
-        "${DI_NAME}"
-else
-    echo "Unknown environment: $ENVIRONMENT"
-    exit 1
-fi
+echo "Starting the container..."
+docker run -d --restart unless-stopped \
+    --name="${CONTAINER_NAME}" \
+    -p 15521:80 \
+    -e API_URL="${API_URL}" \
+    "${IMAGE_NAME}"
+
+echo "Container has been started"
