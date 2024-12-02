@@ -7,7 +7,7 @@ on:
     - "qa"
 
 env:
-  PROJECT_NAME: powerimo-secrets-web
+  PROJECT_NAME: powerimo-short-links-web
 
 jobs:
   build:
