@@ -6,7 +6,7 @@ on:
       - 'release/**'
 
 env:
-  SERVER_PROJECT_NAME: powerimo-secrets-web
+  SERVER_PROJECT_NAME: powerimo-short-links-web
 
 jobs:
   build:
