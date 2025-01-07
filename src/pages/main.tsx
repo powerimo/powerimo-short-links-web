@@ -47,7 +47,7 @@ export function Main() {
 
     const { toast } = useToast();
 
-    const createLink: SubmitHandler<Form> = async (data) => {
+    const createSecret: SubmitHandler<Form> = async (data) => {
         const ttl = Math.round((data.dateTime.getTime() - Date.now()) / 1000);
 
         const response = await fetch(CONFIG.apiSecretsUrl, {
@@ -130,12 +130,12 @@ export function Main() {
         <div className='flex-1 container content-center px-4 md:px-6'>
             <Card className='w-full max-w-lg m-auto border-0'>
                 <CardHeader>
-                    <CardTitle>Create short link</CardTitle>
+                    <CardTitle>Create secret</CardTitle>
                 </CardHeader>
                 <CardContent className='flex w-full flex-col'>
                     <Form {...form}>
                         <form
-                            onSubmit={handleSubmit(createLink)}
+                            onSubmit={handleSubmit(createSecret)}
                             className='space-y-4'
                         >
                             <FormField
@@ -316,7 +316,7 @@ export function Main() {
                                             <Separator className='my-8' />
                                             <div className='flex w-full flex-col'>
                                                 <span className='text-sm font-medium leading-none'>
-                                                    Your link to secret
+                                                    Link to your secret
                                                 </span>
                                                 <div className='flex items-end space-x-2'>
                                                     <ScrollArea className='text-lg leading-9 font-semibold whitespace-nowrap'>
