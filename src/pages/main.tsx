@@ -17,7 +17,10 @@ import { Calendar } from '@/components/ui/calendar';
 
 const FormSchema = z.object({
     url: z.string().url({ message: 'Please enter a valid URL string' }),
-    dateTime: z.date().optional(),
+    dateTime: z
+        .date()
+        .refine((date) => date > new Date(), { message: 'The date must be in the future.' })
+        .optional(),
     hitLimit: z.preprocess(
         (v) => (v === '' ? null : v),
         z.nullable(z.coerce.number({ message: 'Please enter a valid positive integer' }).int().positive()),
@@ -103,7 +106,7 @@ export function Main() {
 
     const handleDateSelect = (date: Date | undefined) => {
         if (date) {
-            setValue('dateTime', date);
+            setValue('dateTime', date, { shouldValidate: true });
         }
     };
 
@@ -118,7 +121,7 @@ export function Main() {
             newDate.setMinutes(parseInt(value, 10));
         }
 
-        setValue('dateTime', newDate);
+        setValue('dateTime', newDate, { shouldValidate: true });
     };
 
     const handleClearDatetime = () => {
@@ -135,9 +138,12 @@ export function Main() {
                 <CardHeader>
                     <CardTitle>Create short link</CardTitle>
                 </CardHeader>
-                <CardContent className='flex w-full flex-col space-y-6'>
+                <CardContent className='flex w-full flex-col'>
                     <Form {...form}>
-                        <form onSubmit={handleSubmit(createLink)}>
+                        <form
+                            onSubmit={handleSubmit(createLink)}
+                            className='space-y-6'
+                        >
                             <FormField
                                 control={control}
                                 name='url'
@@ -146,7 +152,7 @@ export function Main() {
                                         <FormItem>
                                             <FormLabel>Enter the URL to shorten and click on link button</FormLabel>
                                             <FormControl>
-                                                <div className='flex items-end space-x-2'>
+                                                <div className='flex items-end space-x-1'>
                                                     <Input
                                                         placeholder='your url'
                                                         {...field}
@@ -166,7 +172,7 @@ export function Main() {
                                     );
                                 }}
                             />
-                            <div className='flex w-full flex-row space-x-6 mt-4'>
+                            <div className='flex w-full flex-row space-x-6'>
                                 <FormField
                                     control={form.control}
                                     name='dateTime'
@@ -174,14 +180,14 @@ export function Main() {
                                         <FormItem className='flex-1'>
                                             <FormLabel>Expiration time (optional)</FormLabel>
                                             <Popover>
-                                                <div className='flex items-end space-x-2'>
+                                                <div className='flex items-end space-x-1'>
                                                     <PopoverTrigger asChild>
                                                         <FormControl>
                                                             <Button
                                                                 variant={'outline'}
                                                                 type='button'
                                                                 className={cn(
-                                                                    'justify-start font-normal px-3',
+                                                                    'justify-start font-normal px-3 w-full',
                                                                     !field.value && 'text-muted-foreground',
                                                                 )}
                                                             >
@@ -213,6 +219,11 @@ export function Main() {
                                                             mode='single'
                                                             selected={field.value}
                                                             onSelect={handleDateSelect}
+                                                            disabled={(date) => {
+                                                                const today = new Date();
+                                                                today.setHours(0, 0, 0, 0);
+                                                                return date < today;
+                                                            }}
                                                             initialFocus
                                                         />
                                                         <div className='flex flex-col sm:flex-row sm:h-[300px] divide-y sm:divide-y-0 sm:divide-x'>
@@ -294,7 +305,7 @@ export function Main() {
                                             <FormItem className='flex-1'>
                                                 <FormLabel>Hit limit (optional)</FormLabel>
                                                 <FormControl>
-                                                    <div className='flex items-end space-x-2'>
+                                                    <div className='flex items-end space-x-1'>
                                                         <Input
                                                             className='tabular-nums'
                                                             placeholder='input limit'
@@ -333,7 +344,7 @@ export function Main() {
                                                 <span className='text-sm font-medium leading-none'>
                                                     Your short link
                                                 </span>
-                                                <div className='flex items-end space-x-2'>
+                                                <div className='flex items-end space-x-1'>
                                                     <span className='text-lg font-semibold w-full'>{field.value}</span>
                                                     {navigator.clipboard && (
                                                         <Button
