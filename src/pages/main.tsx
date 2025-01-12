@@ -6,7 +6,7 @@ import { Separator } from '@/components/ui/separator';
 import { useToast } from '@/components/ui/use-toast';
 import { CONFIG } from '@/lib/config';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Clipboard, X } from 'lucide-react';
+import { Clipboard } from 'lucide-react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
@@ -120,10 +120,6 @@ export function Main() {
         }
 
         setValue('dateTime', newDate, { shouldValidate: true });
-    };
-
-    const handleClearPassword = () => {
-        setValue('password', '');
     };
 
     return (
