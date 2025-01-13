@@ -59,7 +59,7 @@ export function Main() {
                 secret: data.secretText,
                 hitLimit: data.hitLimit,
                 ttl,
-                password: data.password,
+                password: data.password && data.password != "" ? data.password : null,
             }),
         });
         if (response.ok) {
