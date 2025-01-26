@@ -36,7 +36,7 @@ i18n.use(Backend)
         fallbackLng: 'en',
         debug: true,
         backend: {
-            loadPath: `${CONFIG.baseDir ?? '/'}/locales/{{lng}}/{{ns}}.json`
+            loadPath: `${CONFIG.baseDir ?? ''}/locales/{{lng}}/{{ns}}.json`
         },
         interpolation: {
             escapeValue: false,
