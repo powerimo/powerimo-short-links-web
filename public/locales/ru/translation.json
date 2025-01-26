@@ -1,0 +1,24 @@
+{
+    "Main page": {
+        "Create short link": "Создать короткую ссылку",
+        "Enter the URL to shorten and click on link button": "Введите URL для сокращения и кликните на кнопку",
+        "your url": "url",
+        "Please enter a valid URL string": "Пожалуйста, введите корректный URL",
+        "Expiration time (optional)": "Время жизни ссылки (необязательно)",
+        "click to select": "кликните для выбора",
+        "The expiration time must be in the future": "Время жизни ссылки должно быть в будущем",
+        "Hit limit (optional)": "Лимит просмотров (необязательно)",
+        "Please enter a valid positive integer": "Введите корректное положительное целое число",
+        "Your short link": "Ваша ссылка",
+        "Your short link created and copied to clipboard": "Ссылка создана и скопирована в буфер обмена",
+        "Your short link created": "Ссылка создана",
+        "Error": "Ошибка",
+        "Your short link copied to clipboard": "Ссылка скопирована в буфер обмена"
+    },
+    "Not found page": {
+        "Error 404": "Ошибка 404",
+        "We're sorry": "Извините,",
+        "Your link not found or expired": "Ваша ссылка не найдена, или срок ее жизни истек",
+        "Create another link": "Создать новую ссылку"
+    }
+}

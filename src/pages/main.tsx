@@ -14,23 +14,31 @@ import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area';
 import { cn } from '@/lib/utils';
 import { format } from 'date-fns';
 import { Calendar } from '@/components/ui/calendar';
-
-const FormSchema = z.object({
-    url: z.string().url({ message: 'Please enter a valid URL string' }),
-    dateTime: z
-        .date()
-        .refine((date) => date > new Date(), { message: 'The date must be in the future.' })
-        .optional(),
-    hitLimit: z.preprocess(
-        (v) => (v === '' ? null : v),
-        z.nullable(z.coerce.number({ message: 'Please enter a valid positive integer' }).int().positive()),
-    ),
-    shortLink: z.string(),
-});
-
-type Form = z.infer<typeof FormSchema>;
+import { useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
 
 export function Main() {
+    const { t } = useTranslation('translation', { keyPrefix: 'Main page' });
+
+    const FormSchema = useMemo(
+        () =>
+            z.object({
+                url: z.string().url({ message: t('Please enter a valid URL string')}),
+                dateTime: z
+                    .date()
+                    .refine((date) => date > new Date(), { message: t('The expiration time must be in the future') })
+                    .optional(),
+                hitLimit: z.preprocess(
+                    (v) => (v === '' ? null : v),
+                    z.nullable(z.coerce.number({ message: t('Please enter a valid positive integer') }).int().positive()),
+                ),
+                shortLink: z.string(),
+            }),
+        [t],
+    );
+
+    type Form = z.infer<typeof FormSchema>;
+
     const form = useForm<Form>({
         mode: 'onChange',
         resolver: zodResolver(FormSchema),
@@ -71,19 +79,19 @@ export function Main() {
             if (navigator.clipboard) {
                 navigator.clipboard.writeText(linkCreated);
                 toast({
-                    title: 'Your short link created and copied to clipboard',
+                    title: t('Your short link created and copied to clipboard'),
                     description: linkCreated,
                 });
             } else {
                 toast({
-                    title: 'Your short link created',
+                    title: t('Your short link created'),
                     description: linkCreated,
                 });
             }
         } else {
             const errorData = await response.json();
             toast({
-                title: `Error ${response.status}`,
+                title: `${'Error'} ${response.status}`,
                 description: errorData.message || response.statusText,
                 variant: 'destructive',
             });
@@ -98,7 +106,7 @@ export function Main() {
         if (shortLink) {
             navigator.clipboard.writeText(shortLink);
             toast({
-                title: 'Your short link copied to clipboard',
+                title: t('Your short link copied to clipboard'),
                 description: shortLink,
             });
         }
@@ -136,7 +144,7 @@ export function Main() {
         <div className='flex-1 container content-center px-4 md:px-6'>
             <Card className='w-full max-w-lg m-auto border-0'>
                 <CardHeader>
-                    <CardTitle>Create short link</CardTitle>
+                    <CardTitle>{t('Create short link')}</CardTitle>
                 </CardHeader>
                 <CardContent className='flex w-full flex-col'>
                     <Form {...form}>
@@ -150,11 +158,11 @@ export function Main() {
                                 render={({ field }) => {
                                     return (
                                         <FormItem>
-                                            <FormLabel>Enter the URL to shorten and click on link button</FormLabel>
+                                            <FormLabel>{t('Enter the URL to shorten and click on link button')}</FormLabel>
                                             <FormControl>
                                                 <div className='flex items-end space-x-1'>
                                                     <Input
-                                                        placeholder='your url'
+                                                        placeholder={t('your url')}
                                                         {...field}
                                                     />
                                                     <Button
@@ -172,13 +180,13 @@ export function Main() {
                                     );
                                 }}
                             />
-                            <div className='flex w-full flex-row space-x-6'>
+                            <div className='flex flex-row space-x-6'>
                                 <FormField
                                     control={form.control}
                                     name='dateTime'
                                     render={({ field }) => (
                                         <FormItem className='flex-1'>
-                                            <FormLabel>Expiration time (optional)</FormLabel>
+                                            <FormLabel>{t('Expiration time (optional)')}</FormLabel>
                                             <Popover>
                                                 <div className='flex items-end space-x-1'>
                                                     <PopoverTrigger asChild>
@@ -194,7 +202,7 @@ export function Main() {
                                                                 {field.value ? (
                                                                     format(field.value, 'dd.MM.yyyy HH:mm')
                                                                 ) : (
-                                                                    <span>click to select</span>
+                                                                    <span>{t('click to select')}</span>
                                                                 )}
                                                             </Button>
                                                         </FormControl>
@@ -303,7 +311,7 @@ export function Main() {
                                     render={({ field }) => {
                                         return (
                                             <FormItem className='flex-1'>
-                                                <FormLabel>Hit limit (optional)</FormLabel>
+                                                <FormLabel>{t('Hit limit (optional)')}</FormLabel>
                                                 <FormControl>
                                                     <div className='flex items-end space-x-1'>
                                                         <Input
@@ -342,7 +350,7 @@ export function Main() {
                                             <Separator className='my-8' />
                                             <div className='flex w-full flex-col'>
                                                 <span className='text-sm font-medium leading-none'>
-                                                    Your short link
+                                                    {t('Your short link')}
                                                 </span>
                                                 <div className='flex items-end space-x-1'>
                                                     <span className='text-lg font-semibold w-full'>{field.value}</span>
