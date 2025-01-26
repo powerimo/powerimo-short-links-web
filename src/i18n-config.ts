@@ -32,11 +32,11 @@ i18n.use(Backend)
     .use(LanguageDetector)
     .use(initReactI18next)
     .init({
-        load: 'languageOnly',
+        supportedLngs: LANGUAGES.map((l) => l.code),
         fallbackLng: 'en',
         debug: true,
         backend: {
-            loadPath: `${CONFIG.baseDir ?? '/'}/locales/{{lng}}/{{ns}}.json`
+            loadPath: `${CONFIG.baseDir ?? ''}/locales/{{lng}}/{{ns}}.json`
         },
         interpolation: {
             escapeValue: false,
