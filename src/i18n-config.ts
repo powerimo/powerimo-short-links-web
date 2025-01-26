@@ -4,6 +4,8 @@ import { initReactI18next } from 'react-i18next';
 import Backend from 'i18next-http-backend';
 import LanguageDetector from 'i18next-browser-languagedetector';
 
+import { CONFIG } from './lib/config';
+
 export const LANGUAGES = [
     //    { code: 'cs', name: 'Čeština' },
     //    { code: 'de', name: 'Deutsch' },
@@ -33,6 +35,9 @@ i18n.use(Backend)
         supportedLngs: LANGUAGES.map((l) => l.code),
         fallbackLng: 'en',
         debug: true,
+        backend: {
+            loadPath: `${CONFIG.baseDir ?? ''}/locales/{{lng}}/{{ns}}.json`
+        },
         interpolation: {
             escapeValue: false,
         },
