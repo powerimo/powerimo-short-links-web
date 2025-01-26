@@ -32,7 +32,7 @@ i18n.use(Backend)
     .use(LanguageDetector)
     .use(initReactI18next)
     .init({
-        load: 'languageOnly',
+        supportedLngs: LANGUAGES.map((l) => l.code),
         fallbackLng: 'en',
         debug: true,
         backend: {
