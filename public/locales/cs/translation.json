@@ -1,0 +1,24 @@
+{
+    "Main page": {
+        "Create short link": "Vytvořit krátký odkaz",
+        "Enter the URL to shorten and click on link button": "Zadejte URL k zkrácení a klikněte na tlačítko odkazu",
+        "your url": "vaše URL",
+        "Please enter a valid URL string": "Zadejte prosím platný URL řetězec",
+        "Expiration time (optional)": "Doba expirace (volitelné)",
+        "click to select": "klikněte pro výběr",
+        "The expiration time must be in the future": "Doba expirace musí být v budoucnosti",
+        "Hit limit (optional)": "Limit kliknutí (volitelné)",
+        "Please enter a valid positive integer": "Zadejte prosím platné kladné celé číslo",
+        "Your short link": "Váš krátký odkaz",
+        "Your short link created and copied to clipboard": "Váš krátký odkaz byl vytvořen a zkopírován do schránky",
+        "Your short link created": "Váš krátký odkaz byl vytvořen",
+        "Error": "Chyba",
+        "Your short link copied to clipboard": "Váš krátký odkaz byl zkopírován do schránky"
+    },
+    "Not found page": {
+        "Error 404": "Chyba 404",
+        "We're sorry": "Je nám líto,",
+        "Your link not found or expired": "Váš odkaz nebyl nalezen nebo vypršela jeho platnost",
+        "Create another link": "Vytvořit další odkaz"
+    }
+}

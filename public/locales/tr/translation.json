@@ -1,0 +1,24 @@
+{
+    "Main page": {
+        "Create short link": "Kısa link oluştur",
+        "Enter the URL to shorten and click on link button": "Kısaltmak için URL'yi girin ve bağlantı düğmesine tıklayın",
+        "your url": "URL'niz",
+        "Please enter a valid URL string": "Lütfen geçerli bir URL girin",
+        "Expiration time (optional)": "Son kullanma süresi (isteğe bağlı)",
+        "click to select": "seçmek için tıklayın",
+        "The expiration time must be in the future": "Son kullanma süresi gelecekte olmalıdır",
+        "Hit limit (optional)": "Tıklama sınırı (isteğe bağlı)",
+        "Please enter a valid positive integer": "Lütfen geçerli bir pozitif tam sayı girin",
+        "Your short link": "Kısa linkiniz",
+        "Your short link created and copied to clipboard": "Kısa linkiniz oluşturuldu ve panoya kopyalandı",
+        "Your short link created": "Kısa linkiniz oluşturuldu",
+        "Error": "Hata",
+        "Your short link copied to clipboard": "Kısa linkiniz panoya kopyalandı"
+    },
+    "Not found page": {
+        "Error 404": "Hata 404",
+        "We're sorry": "Üzgünüz,",
+        "Your link not found or expired": "Bağlantınız bulunamadı veya süresi doldu",
+        "Create another link": "Başka bir bağlantı oluştur"
+    }
+}

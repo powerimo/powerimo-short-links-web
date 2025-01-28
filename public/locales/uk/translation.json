@@ -1,0 +1,24 @@
+{
+    "Main page": {
+        "Create short link": "Створити коротке посилання",
+        "Enter the URL to shorten and click on link button": "Введіть URL для скорочення та натисніть на кнопку посилання",
+        "your url": "ваш URL",
+        "Please enter a valid URL string": "Будь ласка, введіть правильний URL",
+        "Expiration time (optional)": "Час закінчення (необов'язково)",
+        "click to select": "натисніть, щоб вибрати",
+        "The expiration time must be in the future": "Час закінчення повинен бути в майбутньому",
+        "Hit limit (optional)": "Ліміт кліків (необов'язково)",
+        "Please enter a valid positive integer": "Будь ласка, введіть коректне додатнє ціле число",
+        "Your short link": "Ваше коротке посилання",
+        "Your short link created and copied to clipboard": "Ваше коротке посилання створено та скопійовано в буфер обміну",
+        "Your short link created": "Ваше коротке посилання створено",
+        "Error": "Помилка",
+        "Your short link copied to clipboard": "Ваше коротке посилання скопійовано в буфер обміну"
+    },
+    "Not found page": {
+        "Error 404": "Помилка 404",
+        "We're sorry": "Нам шкода,",
+        "Your link not found or expired": "Ваше посилання не знайдено або термін дії закінчився",
+        "Create another link": "Створити інше посилання"
+    }
+}
