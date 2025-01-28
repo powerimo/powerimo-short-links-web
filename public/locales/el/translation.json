@@ -1,0 +1,24 @@
+{
+    "Main page": {
+        "Create short link": "Δημιουργία συντόμευσης",
+        "Enter the URL to shorten and click on link button": "Εισάγετε το URL για συντόμευση και κάντε κλικ στο κουμπί σύνδεσης",
+        "your url": "το URL σας",
+        "Please enter a valid URL string": "Εισάγετε μια έγκυρη συμβολοσειρά URL",
+        "Expiration time (optional)": "Χρόνος λήξης (προαιρετικό)",
+        "click to select": "κάντε κλικ για επιλογή",
+        "The expiration time must be in the future": "Ο χρόνος λήξης πρέπει να είναι στο μέλλον",
+        "Hit limit (optional)": "Όριο κλικ (προαιρετικό)",
+        "Please enter a valid positive integer": "Εισάγετε έναν έγκυρο θετικό ακέραιο αριθμό",
+        "Your short link": "Η συντόμευσή σας",
+        "Your short link created and copied to clipboard": "Η συντόμευσή σας δημιουργήθηκε και αντιγράφηκε στο πρόχειρο",
+        "Your short link created": "Η συντόμευσή σας δημιουργήθηκε",
+        "Error": "Σφάλμα",
+        "Your short link copied to clipboard": "Η συντόμευσή σας αντιγράφηκε στο πρόχειρο"
+    },
+    "Not found page": {
+        "Error 404": "Σφάλμα 404",
+        "We're sorry": "Λυπούμαστε,",
+        "Your link not found or expired": "Ο σύνδεσμός σας δεν βρέθηκε ή έχει λήξει",
+        "Create another link": "Δημιουργήστε έναν άλλο σύνδεσμο"
+    }
+}

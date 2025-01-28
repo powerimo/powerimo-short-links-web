@@ -1,0 +1,24 @@
+{
+    "Main page": {
+        "Create short link": "创建短链接",
+        "Enter the URL to shorten and click on link button": "输入要缩短的 URL 并点击链接按钮",
+        "your url": "您的 URL",
+        "Please enter a valid URL string": "请输入有效的 URL 字符串",
+        "Expiration time (optional)": "到期时间（可选）",
+        "click to select": "点击选择",
+        "The expiration time must be in the future": "到期时间必须在未来",
+        "Hit limit (optional)": "点击限制（可选）",
+        "Please enter a valid positive integer": "请输入有效的正整数",
+        "Your short link": "您的短链接",
+        "Your short link created and copied to clipboard": "您的短链接已创建并复制到剪贴板",
+        "Your short link created": "您的短链接已创建",
+        "Error": "错误",
+        "Your short link copied to clipboard": "您的短链接已复制到剪贴板"
+    },
+    "Not found page": {
+        "Error 404": "错误 404",
+        "We're sorry": "很抱歉，",
+        "Your link not found or expired": "您的链接未找到或已过期",
+        "Create another link": "创建另一个链接"
+    }
+}

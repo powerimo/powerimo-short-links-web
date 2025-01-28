@@ -1,0 +1,24 @@
+{
+    "Main page": {
+        "Create short link": "Luo lyhyt linkki",
+        "Enter the URL to shorten and click on link button": "Syötä URL lyhentääksesi sen ja napsauta linkkipainiketta",
+        "your url": "URL-osoitteesi",
+        "Please enter a valid URL string": "Anna kelvollinen URL-osoite",
+        "Expiration time (optional)": "Vanhenemisaika (valinnainen)",
+        "click to select": "napsauta valitaksesi",
+        "The expiration time must be in the future": "Vanhenemisajan on oltava tulevaisuudessa",
+        "Hit limit (optional)": "Klikkausraja (valinnainen)",
+        "Please enter a valid positive integer": "Anna kelvollinen positiivinen kokonaisluku",
+        "Your short link": "Lyhyt linkkisi",
+        "Your short link created and copied to clipboard": "Lyhyt linkkisi luotiin ja kopioitiin leikepöydälle",
+        "Your short link created": "Lyhyt linkkisi luotiin",
+        "Error": "Virhe",
+        "Your short link copied to clipboard": "Lyhyt linkkisi kopioitiin leikepöydälle"
+    },
+    "Not found page": {
+        "Error 404": "Virhe 404",
+        "We're sorry": "Olemme pahoillamme,",
+        "Your link not found or expired": "Linkkiäsi ei löytynyt tai se on vanhentunut",
+        "Create another link": "Luo toinen linkki"
+    }
+}
