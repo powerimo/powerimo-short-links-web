@@ -1,0 +1,24 @@
+{
+    "Main page": {
+        "Create short link": "Kreiraj kratki link",
+        "Enter the URL to shorten and click on link button": "Unesite URL za skraćivanje i kliknite na gumb za link",
+        "your url": "vaš URL",
+        "Please enter a valid URL string": "Molimo unesite valjani URL",
+        "Expiration time (optional)": "Vrijeme isteka (opcionalno)",
+        "click to select": "kliknite za odabir",
+        "The expiration time must be in the future": "Vrijeme isteka mora biti u budućnosti",
+        "Hit limit (optional)": "Ograničenje klikova (opcionalno)",
+        "Please enter a valid positive integer": "Molimo unesite valjani pozitivni cijeli broj",
+        "Your short link": "Vaš kratki link",
+        "Your short link created and copied to clipboard": "Vaš kratki link je kreiran i kopiran u međuspremnik",
+        "Your short link created": "Vaš kratki link je kreiran",
+        "Error": "Greška",
+        "Your short link copied to clipboard": "Vaš kratki link je kopiran u međuspremnik"
+    },
+    "Not found page": {
+        "Error 404": "Greška 404",
+        "We're sorry": "Žao nam je,",
+        "Your link not found or expired": "Vaš link nije pronađen ili je istekao",
+        "Create another link": "Kreirajte drugi link"
+    }
+}

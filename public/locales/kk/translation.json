@@ -1,0 +1,24 @@
+{
+    "Main page": {
+        "Create short link": "Қысқа сілтеме жасау",
+        "Enter the URL to shorten and click on link button": "Қысқартқыңыз келген URL-ді енгізіп, сілтеме түймесін басыңыз",
+        "your url": "сіздің URL",
+        "Please enter a valid URL string": "Жарамды URL енгізіңіз",
+        "Expiration time (optional)": "Мерзімі (міндетті емес)",
+        "click to select": "таңдау үшін басыңыз",
+        "The expiration time must be in the future": "Мерзімі болашақта болуы керек",
+        "Hit limit (optional)": "Шектеу саны (міндетті емес)",
+        "Please enter a valid positive integer": "Жарамды оң бүтін сан енгізіңіз",
+        "Your short link": "Сіздің қысқа сілтемеңіз",
+        "Your short link created and copied to clipboard": "Қысқа сілтеме жасалды және буферге көшірілді",
+        "Your short link created": "Қысқа сілтеме жасалды",
+        "Error": "Қате",
+        "Your short link copied to clipboard": "Сіздің қысқа сілтемеңіз буферге көшірілді"
+    },
+    "Not found page": {
+        "Error 404": "404 қатесі",
+        "We're sorry": "Кешіріңіз,",
+        "Your link not found or expired": "Сілтемеңіз табылмады немесе мерзімі өтті",
+        "Create another link": "Басқа сілтеме жасау"
+    }
+}

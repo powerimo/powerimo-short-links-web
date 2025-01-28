@@ -1,0 +1,24 @@
+{
+    "Main page": {
+        "Create short link": "Create short link",
+        "Enter the URL to shorten and click on link button": "Enter the URL to shorten and click on link button",
+        "your url": "your url",
+        "Please enter a valid URL string": "Please enter a valid URL string",
+        "Expiration time (optional)": "Expiration time (optional)",
+        "click to select": "click to select",
+        "The expiration time must be in the future": "The expiration time must be in the future",
+        "Hit limit (optional)": "Hit limit (optional)",
+        "Please enter a valid positive integer": "Please enter a valid positive integer",
+        "Your short link": "Your short link",
+        "Your short link created and copied to clipboard": "Your short link created and copied to clipboard",
+        "Your short link created": "Your short link created",
+        "Error": "Error",
+        "Your short link copied to clipboard": "Your short link copied to clipboard"
+    },
+    "Not found page": {
+        "Error 404": "Error 404",
+        "We're sorry": "We're sorry,",
+        "Your link not found or expired": "Your link not found or expired",
+        "Create another link": "Create another link"
+    }
+}

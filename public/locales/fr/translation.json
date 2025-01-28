@@ -1,0 +1,24 @@
+{
+    "Main page": {
+        "Create short link": "Créer un lien court",
+        "Enter the URL to shorten and click on link button": "Entrez l'URL à raccourcir et cliquez sur le bouton de lien",
+        "your url": "votre URL",
+        "Please enter a valid URL string": "Veuillez entrer une URL valide",
+        "Expiration time (optional)": "Date d'expiration (optionnelle)",
+        "click to select": "cliquez pour sélectionner",
+        "The expiration time must be in the future": "La date d'expiration doit être dans le futur",
+        "Hit limit (optional)": "Limite de clics (optionnelle)",
+        "Please enter a valid positive integer": "Veuillez entrer un entier positif valide",
+        "Your short link": "Votre lien court",
+        "Your short link created and copied to clipboard": "Votre lien court a été créé et copié dans le presse-papiers",
+        "Your short link created": "Votre lien court a été créé",
+        "Error": "Erreur",
+        "Your short link copied to clipboard": "Votre lien court a été copié dans le presse-papiers"
+    },
+    "Not found page": {
+        "Error 404": "Erreur 404",
+        "We're sorry": "Nous sommes désolés,",
+        "Your link not found or expired": "Votre lien est introuvable ou a expiré",
+        "Create another link": "Créer un autre lien"
+    }
+}

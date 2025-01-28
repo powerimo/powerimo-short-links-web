@@ -1,0 +1,24 @@
+{
+    "Main page": {
+        "Create short link": "Hozzon létre rövid linket",
+        "Enter the URL to shorten and click on link button": "Adja meg a rövidíteni kívánt URL-t, majd kattintson a link gombra",
+        "your url": "az ön URL-je",
+        "Please enter a valid URL string": "Kérjük, adjon meg érvényes URL-t",
+        "Expiration time (optional)": "Lejárati idő (opcionális)",
+        "click to select": "kattintson a kiválasztáshoz",
+        "The expiration time must be in the future": "A lejárati időnek a jövőben kell lennie",
+        "Hit limit (optional)": "Találati korlát (opcionális)",
+        "Please enter a valid positive integer": "Kérjük, adjon meg egy érvényes pozitív egész számot",
+        "Your short link": "Az ön rövid linkje",
+        "Your short link created and copied to clipboard": "A rövid linkje létrejött és a vágólapra másolva",
+        "Your short link created": "Az ön rövid linkje létrejött",
+        "Error": "Hiba",
+        "Your short link copied to clipboard": "Az ön rövid linkje a vágólapra másolva"
+    },
+    "Not found page": {
+        "Error 404": "404-es hiba",
+        "We're sorry": "Sajnáljuk,",
+        "Your link not found or expired": "Az ön linkje nem található vagy lejárt",
+        "Create another link": "Hozzon létre egy másik linket"
+    }
+}
